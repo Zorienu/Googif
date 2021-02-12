@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import getGifById from "../../services/getGifById";
-import Gif from "../Gif/Gif";
+import Gif from "../../components/Gif/Gif";
 
-const GifInfo = ({ params }) => {
+const Details = ({ params }) => {
   const { id } = params;
   const [gif, setGif] = useState(null);
 
@@ -17,4 +17,4 @@ const GifInfo = ({ params }) => {
   );
 };
 
-export default GifInfo;
+export default Details;
