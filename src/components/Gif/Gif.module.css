@@ -1,0 +1,10 @@
+.gif {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}

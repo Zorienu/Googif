@@ -1,9 +1,13 @@
-const Gif = ({ url, title }) => {
+import { Link } from "wouter";
+import classes from "./Gif.module.css";
+
+const Gif = ({ id, url, title, date }) => {
   return (
-    <div>
+    <Link to={`/gifinfo/${id}`} className={classes.gif}>
       <h4>{title}</h4>
       <img src={url} alt="gif" />
-    </div>
+      {date && <i>{date}</i>}
+    </Link>
   );
 };
 
