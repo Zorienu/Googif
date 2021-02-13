@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react";
-
-import getGifs from "../../services/getGifs";
-import Gif from "../../components/Gif/Gif";
-
-import classes from "./index.module.css";
+import Gifs from "../../components/Gifs/Gifs";
+import useGifs from "../../hooks/useGifs";
 
 const SearchResults = ({ params }) => {
   const { keyword } = params;
-  const [gifs, setGifs] = useState([]);
+  const { gifs, loading } = useGifs(keyword);
 
-  useEffect(() => {
-    getGifs({ keyword }).then((res) => setGifs(res));
-  }, [keyword]);
-
-  return (
-    <div className={classes.gifs}>
-      {gifs.map(({ id, title, url }) => (
-        <Gif key={id} id={id} title={title} url={url} />
-      ))}
-    </div>
-  );
+  return loading ? <div>Loading...</div> : <Gifs gifs={gifs} />;
 };
 
 export default SearchResults;

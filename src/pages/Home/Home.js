@@ -1,17 +1,21 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
+import useGifs from "../../hooks/useGifs";
+import Gifs from "../../components/Gifs/Gifs";
 
 const Home = () => {
   const [location, setLocation] = useLocation();
   const tags = ["ferrari", "subaru", "anime", "japon", "korea", "otter"];
   const [keyword, setKeyword] = useState("");
 
+  const { gifs } = useGifs();
+
   const handleSubmit = (e) => setLocation(`/search/${keyword}`);
 
   const handleChange = (e) => {
     setKeyword(e.target.value);
   };
-  console.log(keyword);
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -22,6 +26,9 @@ const Home = () => {
           onChange={handleChange}
         />
       </form>
+      <h4>Ultima búsqueda</h4>
+      <Gifs gifs={gifs} />
+      <h4>Gifs populares</h4>
       {tags.map((tag, i) => (
         <Link key={i} to={`/search/${tag}`}>
           Gif de {tag}
