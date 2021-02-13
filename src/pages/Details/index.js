@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import getGifById from "../../services/getGifById";
-import Gif from "../../components/Gif/Gif";
+import getGifById from "services/getGifById";
+import Gif from "components/Gif/Gif";
 
 const Details = ({ params }) => {
   const { id } = params;

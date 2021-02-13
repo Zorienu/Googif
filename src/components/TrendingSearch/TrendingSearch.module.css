@@ -1,0 +1,10 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.link {
+  display: inline-block;
+  margin: 7px 20px;
+}

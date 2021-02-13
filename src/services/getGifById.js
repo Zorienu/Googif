@@ -1,9 +1,9 @@
-const API_KEY = "vklctwKmEwUBnrWW8w6e6Z1R9vwdeEwv";
+import { API_KEY, API_URL } from "./settings";
 
 export default function getGifById(id) {
-  const API_URL = `https://api.giphy.com/v1/gifs/${id}?api_key=${API_KEY}`;
+  const url = `${API_URL}/gifs/${id}?api_key=${API_KEY}`;
 
-  return fetch(API_URL)
+  return fetch(url)
     .then((res) => res.json())
     .then(({ data }) => {
       const { title, images, import_datetime: date } = data;

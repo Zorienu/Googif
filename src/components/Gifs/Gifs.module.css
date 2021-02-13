@@ -3,6 +3,7 @@
   width: 80%;
   columns: 4;
   column-gap: 10px;
+  min-height: 100vh;
 }
 
 @media only screen and (max-width: 1200px) {

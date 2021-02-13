@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import useGifs from "../../hooks/useGifs";
-import Gifs from "../../components/Gifs/Gifs";
+import useGifs from "hooks/useGifs";
+import Gifs from "components/Gifs/Gifs";
+import TrendingSearch from "components/TrendingSearch";
 
 const Home = () => {
   const [location, setLocation] = useLocation();
@@ -29,11 +30,7 @@ const Home = () => {
       <h4>Ultima búsqueda</h4>
       <Gifs gifs={gifs} />
       <h4>Gifs populares</h4>
-      {tags.map((tag, i) => (
-        <Link key={i} to={`/search/${tag}`}>
-          Gif de {tag}
-        </Link>
-      ))}
+      <TrendingSearch />
     </>
   );
 };
