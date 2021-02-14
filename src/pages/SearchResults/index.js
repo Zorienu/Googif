@@ -11,8 +11,14 @@ const SearchResults = ({ params }) => {
   const { gifs, loading, setPage } = useGifs(keyword);
   const { show, elementRef } = useNearScreen({ once: false });
 
+  const debouncedHandleNextPage = useCallback(
+    debounce(() => handleNextPage(), 200),
+    []
+  );
+
   useEffect(() => {
-    if (show) handleNextPage();
+    console.log(show);
+    if (show) debouncedHandleNextPage();
   }, [show]);
 
   const handleNextPage = () => setPage((prevPage) => prevPage + 1);

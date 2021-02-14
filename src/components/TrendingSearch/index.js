@@ -7,7 +7,7 @@ import useNearScreen from "hooks/useNearScreen";
 const TrendingSearches = React.lazy(() => import("./TrendingSearches.js"));
 
 const LazyTrending = () => {
-  const { show, elementRef } = useNearScreen();
+  const { show, elementRef } = useNearScreen({});
 
   // Suspense component render promises, and render another thing while the promise is resolving
   // inside fallback goes what we want to show while it's loading
