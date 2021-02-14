@@ -1,39 +1,23 @@
-import { useEffect, useState, useRef } from "react";
-import { Link } from "wouter";
-import getTrendingTerms from "services/getTrendingTerms";
+import React, { Suspense } from "react";
 
 import classes from "./TrendingSearch.module.css";
 import useNearScreen from "hooks/useNearScreen";
 
-const TrendingSearch = () => {
-  const [trends, setTrends] = useState(null);
-
-  useEffect(() => {
-    getTrendingTerms().then(setTrends);
-  }, []);
-
-  return (
-    <>
-      {!trends ? (
-        <div>Loading...</div>
-      ) : (
-        trends.map((trend, i) => (
-          <Link className={classes.link} key={i} to={`/search/${trend}`}>
-            {trend}
-          </Link>
-        ))
-      )}
-    </>
-  );
-};
+// importing TrendingSearches just when we need it (dinamically imported)
+const TrendingSearches = React.lazy(() => import("./TrendingSearches.js"));
 
 const LazyTrending = () => {
   const { show, elementRef } = useNearScreen();
 
+  // Suspense component render promises, and render another thing while the promise is resolving
+  // inside fallback goes what we want to show while it's loading
   return (
-    <div className={classes.links} ref={elementRef}>
-      {show && <TrendingSearch />}
-    </div>
+    <Suspense fallback={"Cargando..."}>
+      <div className={classes.links} ref={elementRef}>
+        {show && <TrendingSearches />}
+      </div>
+    </Suspense>
   );
 };
+
 export default LazyTrending;

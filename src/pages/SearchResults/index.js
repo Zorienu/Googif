@@ -3,7 +3,9 @@ import useGifs from "hooks/useGifs";
 
 const SearchResults = ({ params }) => {
   const { keyword } = params;
-  const { gifs, loading } = useGifs(keyword);
+  const { gifs, loading, setPage } = useGifs(keyword);
+
+  const handleNextPage = () => setPage((prevPage) => prevPage + 1);
 
   return loading ? (
     <div>Loading...</div>
@@ -11,6 +13,7 @@ const SearchResults = ({ params }) => {
     <>
       <h4>{decodeURI(keyword)}</h4>
       <Gifs gifs={gifs} />
+      <button onClick={handleNextPage}>Get next page</button>
     </>
   );
 };

@@ -7,9 +7,11 @@ const useNearScreen = (distance = "100px") => {
 
   useEffect(() => {
     const onIntersection = (entries, observer) => {
-      if (entries[0].isIntersecting) {
+      const el = entries[0];
+      if (el.isIntersecting) {
         setShow(true);
-        observer.disconnect();
+        //observer.disconnect(); // stop watching all of its target elements for visibility changes
+        observer.unobserve(elementRef.current); // instructs IntersectionObserver to stop observing the specified target element
       }
     };
 
