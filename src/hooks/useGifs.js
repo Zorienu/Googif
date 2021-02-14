@@ -11,9 +11,11 @@ const useGifs = (keyword = localStorage.getItem("lastKeyword")) => {
 
   useEffect(() => {
     setLoading(true);
-    getGifs({ keyword }).then((res) => setGifs(res));
+    getGifs({ keyword }).then((res) => {
+      setGifs(res);
+      setLoading(false);
+    });
     if (keyword) localStorage.setItem("lastKeyword", keyword);
-    setLoading(false);
   }, [keyword]);
 
   useEffect(() => {

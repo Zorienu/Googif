@@ -1,27 +1,9 @@
+/* auto-fit hace que se agregue otra columna si se puede (si hay 600px mete 2), sino, va aumentanto el tamaño de las columas (dado por 1fr) */
 .gifs {
-  margin: 20px auto;
-  width: 80%;
-  columns: 4;
-  column-gap: 10px;
+  display: grid;
   min-height: 100vh;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: masonry;
+  gap: 10px;
+  align-items: center;
 }
-
-@media only screen and (max-width: 1200px) {
-  .gifs {
-    columns: 3;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .gifs {
-    columns: 2;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .gifs {
-    columns: 1;
-  }
-}
-
-

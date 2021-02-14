@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const useNearScreen = (distance = "100px") => {
+const useNearScreen = ({ distance = "100px", once = true }) => {
   const [show, setShow] = useState(false);
   const elementRef = useRef(null); // este valor se va a mantener inalterado entre renders
   // y cuando se cambia el valor no renderiza el componente
@@ -11,7 +11,9 @@ const useNearScreen = (distance = "100px") => {
       if (el.isIntersecting) {
         setShow(true);
         //observer.disconnect(); // stop watching all of its target elements for visibility changes
-        observer.unobserve(elementRef.current); // instructs IntersectionObserver to stop observing the specified target element
+        once && observer.unobserve(elementRef.current); // instructs IntersectionObserver to stop observing the specified target element
+      } else {
+        !once && setShow(false);
       }
     };
 
@@ -19,7 +21,7 @@ const useNearScreen = (distance = "100px") => {
       rootMargin: distance,
     }); // executes the callback when there is a distance of 100px
 
-    observer.observe(elementRef.current);
+    if (elementRef.current) observer.observe(elementRef.current);
 
     return () => observer.disconnect(); // execute when the component is not used anymore
   });
