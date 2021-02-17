@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useLocation } from "wouter";
 import useGifs from "hooks/useGifs";
 import Gifs from "components/Gifs/Gifs";
@@ -9,9 +10,15 @@ const Home = () => {
 
   const { gifs } = useGifs();
 
-  const handleSubmit = ({ keyword }) => {
-    setLocation(`/search/${keyword}`);
-  };
+  // esto se vuelve a crear con cada renderizado
+  // por lo cual SearchForm se vuelve a renderizar
+  // para solucionarlo usamos useCallback
+  const handleSubmit = useCallback(
+    ({ keyword }) => {
+      setLocation(`/search/${keyword}`);
+    },
+    [setLocation]
+  );
 
   return (
     <>
