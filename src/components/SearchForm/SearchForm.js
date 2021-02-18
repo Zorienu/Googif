@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const SearchForm = ({ onSubmit }) => {
   const [keyword, setKeyword] = useState("");
@@ -24,4 +24,6 @@ const SearchForm = ({ onSubmit }) => {
   );
 };
 
-export default SearchForm;
+// le pasamos el componente que queremos memorizar basándose en las props
+// React.memo es un componente de orden superior (una función que se le pasa un componente y que devuelve otro componente)
+export default React.memo(SearchForm);
