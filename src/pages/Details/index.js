@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import classes from "./Details.module.css";
 
-import getGifById from "services/getGifById";
 import Gif from "components/Gif/Gif";
+import Loading from "components/Loading";
+
+import useSingleGif from "hooks/useSingleGif";
+import { Redirect } from "wouter";
 
 const Details = ({ params }) => {
   const { id } = params;
-  const [gif, setGif] = useState(null);
+  // obtain gif from cache or fetch it
+  const { gif, isLoading, isError } = useSingleGif({ id });
 
-  useEffect(() => getGifById(id).then((res) => setGif(res)), [id]);
-  console.log(gif);
+  if (isLoading) return <Loading />;
+  if (isError) return <Redirect to="/404" />;
+  if (!gif) return null;
 
-  return !gif ? (
-    <h2>Loading...</h2>
-  ) : (
-    <Gif id={id} title={gif.title} url={gif.url} date={gif.date} />
+  return (
+    <div className={classes.gifContainer}>
+      <Gif id={id} title={gif.title} url={gif.url} />
+    </div>
   );
 };
 
